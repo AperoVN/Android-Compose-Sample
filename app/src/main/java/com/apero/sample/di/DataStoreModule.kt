@@ -2,11 +2,14 @@ package com.apero.sample.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.apero.sample.data.prefs.IAppDataStore
-import com.apero.sample.data.prefs.AppDataStoreImpl
+import com.apero.sample.data.prefs.app.IAppDataStore
+import com.apero.sample.data.prefs.app.AppDataStoreImpl
+import com.apero.sample.data.prefs.remoteconfig.IRemoteConfigDataStore
+import com.apero.sample.data.prefs.remoteconfig.RemoteConfigDataStoreImpl
+import com.apero.sample.di.qualifier.AppDataStore
+import com.apero.sample.di.qualifier.RemoteConfigDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,23 +24,35 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
     private const val APP_PREFERENCES_NAME = "app_preferences"
+    private const val REMOTE_CONFIG_PREFERENCES_NAME = "remote_config_preferences"
 
-    private val Context.dataStore by preferencesDataStore(name = APP_PREFERENCES_NAME,
-        produceMigrations = { context ->
-            // Since we're migrating from SharedPreferences, add a migration based on the
-            // SharedPreferences name
-            listOf(SharedPreferencesMigration(context, APP_PREFERENCES_NAME))
-        })
+    private val Context.appDataStore by preferencesDataStore(name = APP_PREFERENCES_NAME)
+
+    private val Context.remoteConfigDataStore by preferencesDataStore(name = REMOTE_CONFIG_PREFERENCES_NAME)
 
     @Provides
     @Singleton
-    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.dataStore
+    @AppDataStore
+    fun provideAppDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return context.appDataStore
     }
 
     @Provides
     @Singleton
-    fun provideAppDataStore(dataStore: DataStore<Preferences>): IAppDataStore {
+    fun provideIAppDataStore(@AppDataStore dataStore: DataStore<Preferences>): IAppDataStore {
         return AppDataStoreImpl(dataStore)
+    }
+
+    @Provides
+    @Singleton
+    @AppDataStore
+    fun provideRemoteConfigDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return context.remoteConfigDataStore
+    }
+
+    @Provides
+    @Singleton
+    fun provideIRemoteConfigDataStore(@RemoteConfigDataStore dataStore: DataStore<Preferences>): IRemoteConfigDataStore {
+        return RemoteConfigDataStoreImpl(dataStore)
     }
 }

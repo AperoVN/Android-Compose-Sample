@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "129962044274",
+    "project_id": "movie-sample-90557",
+    "storage_bucket": "movie-sample-90557.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129962044274:android:42ab081d53d2b38feb0beb",
+        "android_client_info": {
+          "package_name": "com.apero.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129962044274-26g2p5gbvdkifjviqi6r9caij2mf5v8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apero.sample",
+            "certificate_hash": "be8c944e0eccf19802f797774acd1052438263f9"
+          }
+        },
+        {
+          "client_id": "129962044274-ugeqctqukke31t1ie8br0fo7ouqt36s9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6AUuvzxXlx_9jZeeOa9YM68pTdm8_CZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129962044274-ugeqctqukke31t1ie8br0fo7ouqt36s9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

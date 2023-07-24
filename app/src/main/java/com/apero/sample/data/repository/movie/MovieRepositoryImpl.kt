@@ -14,7 +14,7 @@ import com.apero.sample.data.state.ResultState
 class MovieRepositoryImpl(private val apiService: ApiService) : IMovieRepository {
     override suspend fun getListMoviePopular(request: MoviePopularRequest): ResultState<PagingData<Movie>> {
         return ResultState.fromApiResponse {
-            apiService.getMoviePopular(page = request.page ?: 1, limit = request.limit)
+            apiService.getMoviePopular(page = request.page ?: 1)
         }.map { response ->
             val listMovie = response.results?.mapNotNull { movie ->
                 MovieApiToUiConverter.convert(movie)

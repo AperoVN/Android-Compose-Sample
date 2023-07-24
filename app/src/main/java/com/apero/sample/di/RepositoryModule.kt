@@ -1,7 +1,7 @@
 package com.apero.sample.di
 
 import com.apero.sample.data.network.ApiService
-import com.apero.sample.data.prefs.IAppDataStore
+import com.apero.sample.data.prefs.app.IAppDataStore
 import com.apero.sample.data.repository.common.CommonRepositoryImpl
 import com.apero.sample.data.repository.common.ICommonRepository
 import com.apero.sample.data.repository.movie.IMovieRepository

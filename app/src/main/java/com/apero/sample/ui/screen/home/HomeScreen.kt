@@ -1,6 +1,5 @@
 package com.apero.sample.ui.screen.home
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -70,12 +69,11 @@ fun HomeRoute(
             val canLoadPage = vm.uiState.value.pagingMovie.canLoadPage
             val lastIndexVisible = scrollState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
             val totalItemCount = scrollState.layoutInfo.totalItemsCount
-            canLoadPage && lastIndexVisible in totalItemCount - (SPAN_COUNT * 2)..totalItemCount
+            canLoadPage && lastIndexVisible in totalItemCount - (uiState.spanCount * 2)..totalItemCount
         }
     }
     LaunchedEffect(canLoadPage) {
         if (canLoadPage) {
-            Log.d("getListMoviePopular", "from Route")
             vm.loadMore()
         }
     }
@@ -87,8 +85,6 @@ fun HomeRoute(
         onClickGallery = onClickGallery
     )
 }
-
-private const val SPAN_COUNT = 3
 
 @Composable
 fun HomeScreen(
@@ -137,7 +133,7 @@ fun HomeScreen(
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize(),
-                columns = GridCells.Fixed(SPAN_COUNT),
+                columns = GridCells.Fixed(uiState.spanCount),
                 contentPadding = PaddingValues(4.dp),
                 state = scrollState
             ) {
@@ -151,7 +147,7 @@ fun HomeScreen(
                     )
                 }
                 item(
-                    span = { GridItemSpan(SPAN_COUNT) }
+                    span = { GridItemSpan(uiState.spanCount) }
                 ) {
                     when (pagingState) {
                         is PagingState.LoadState.LoadMore -> {

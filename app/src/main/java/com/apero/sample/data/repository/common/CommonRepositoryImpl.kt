@@ -1,7 +1,7 @@
 package com.apero.sample.data.repository.common
 
 import com.apero.sample.data.model.Language
-import com.apero.sample.data.prefs.IAppDataStore
+import com.apero.sample.data.prefs.app.IAppDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull

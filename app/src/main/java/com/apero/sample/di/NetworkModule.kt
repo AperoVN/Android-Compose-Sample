@@ -8,6 +8,7 @@ import com.apero.sample.data.network.interceptor.ParamsInterceptor
 import com.apero.sample.data.network.interceptor.RequestInterceptor
 import com.apero.sample.data.network.monitor.NetworkMonitorImpl
 import com.apero.sample.data.network.monitor.INetworkMonitor
+import com.apero.sample.data.prefs.app.IAppDataStore
 import com.apero.sample.di.qualifier.ApiKey
 import com.apero.sample.di.qualifier.BaseUrl
 import dagger.Module
@@ -56,12 +57,13 @@ object NetworkModule {
     fun getApiService(
         okHttpClient: OkHttpClient,
         @BaseUrl url: String,
-        @ApiKey apiKey: String
+        @ApiKey apiKey: String,
+        appDataStore: IAppDataStore
     ): ApiService {
         return Retrofit.Builder()
             .client(
                 okHttpClient.newBuilder()
-                    .addInterceptor(ParamsInterceptor(apiKey))
+                    .addInterceptor(ParamsInterceptor(apiKey = apiKey, appDataStore = appDataStore))
                     .build()
             )
             .baseUrl(url)

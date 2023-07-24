@@ -12,7 +12,6 @@ import retrofit2.http.Query
 interface ApiService {
     @GET("movie/popular")
     suspend fun getMoviePopular(
-        @Query("page") page: Int,
-        @Query("limit") limit: Int
+        @Query("page") page: Int
     ): Response<ListResponse<List<MovieItemResponse>>>
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apero.sample.data.model.AlbumMedia
 import com.apero.sample.data.model.MediaModel
-import com.apero.sample.data.prefs.IAppDataStore
+import com.apero.sample.data.prefs.app.IAppDataStore
 import com.apero.sample.data.provider.media.MediaProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -32,7 +32,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            UpdateSystemUiController()
             val systemUiController = rememberSystemUiController()
             systemUiController.isNavigationBarVisible = false
             val language by viewModel.languageState.collectAsState(initial = null)

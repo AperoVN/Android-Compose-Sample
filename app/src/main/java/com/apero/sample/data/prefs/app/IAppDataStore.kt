@@ -1,4 +1,4 @@
-package com.apero.sample.data.prefs
+package com.apero.sample.data.prefs.app
 
 import kotlinx.coroutines.flow.Flow
 
