@@ -33,11 +33,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -143,6 +146,7 @@ fun HomeScreen(
                             .fillMaxWidth()
                             .padding(4.dp),
                         movie = movie,
+                        spanCount = uiState.spanCount,
                         onItemClick = onClickMovie,
                     )
                 }
@@ -194,8 +198,11 @@ fun HomeScreen(
 fun MovieItem(
     modifier: Modifier,
     movie: Movie,
-    onItemClick: (Movie) -> Unit
+    onItemClick: (Movie) -> Unit,
+    spanCount: Int
 ) {
+    val configuration = LocalConfiguration.current
+    val widthItem = configuration.screenWidthDp / spanCount
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))
@@ -207,14 +214,16 @@ fun MovieItem(
                 .aspectRatio(9 / 16f)
                 .clip(RoundedCornerShape(8.dp))
                 .background(Color.White),
-            url = movie.posterPath?.create(ImageSize.PosterSize.W154)
+            url = movie.posterPath?.create(ImageSize.PosterSize.getBySize(widthItem))
         )
 
         Text(
             modifier = Modifier,
             textAlign = TextAlign.Start,
             text = movie.title ?: "",
-            style = TextStyle(color = Color.White, fontSize = 14.sp)
+            style = TextStyle(color = Color.White, fontSize = 14.sp),
+            maxLines = 3,
+            overflow = TextOverflow.Ellipsis
         )
         Text(
             modifier = Modifier,
@@ -228,7 +237,12 @@ fun MovieItem(
 @Preview(widthDp = 200)
 @Composable
 fun MovieItemPreview() {
-    MovieItem(modifier = Modifier, movie = Movie.mock(), onItemClick = {})
+    MovieItem(
+        modifier = Modifier,
+        movie = Movie.mock(),
+        onItemClick = {},
+        spanCount = 4
+    )
 }
 
 @Preview

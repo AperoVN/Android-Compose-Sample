@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val systemUiController = rememberSystemUiController()
             systemUiController.isNavigationBarVisible = false
+            systemUiController.setStatusBarColor(Color.Black)
             val language by viewModel.languageState.collectAsState(initial = null)
             language?.let { UpdateLanguage(it) }
             val appState = rememberAppState(this)
