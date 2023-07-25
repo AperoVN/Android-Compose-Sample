@@ -45,7 +45,7 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    @AppDataStore
+    @RemoteConfigDataStore
     fun provideRemoteConfigDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return context.remoteConfigDataStore
     }
