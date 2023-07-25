@@ -33,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -52,6 +51,7 @@ import com.apero.sample.ui.component.FailureUiComponent
 import com.apero.sample.ui.component.ImageLoader
 import com.apero.sample.ui.component.ToolbarDefault
 import com.apero.sample.ui.component.ToolbarTitleAlignment
+import com.apero.sample.ui.screen.TrackScreenViewEvent
 import com.apero.sample.ui.theme.ColorPrimary
 
 /**
@@ -80,6 +80,7 @@ fun HomeRoute(
             vm.loadMore()
         }
     }
+    TrackScreenViewEvent(screenName = "Movie Popular")
     HomeScreen(
         uiState = uiState,
         scrollState = scrollState,

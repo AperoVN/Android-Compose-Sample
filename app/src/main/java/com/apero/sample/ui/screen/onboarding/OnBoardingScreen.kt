@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.apero.sample.R
 import com.apero.sample.data.model.OnBoardingData
+import com.apero.sample.ui.screen.TrackScreenViewEvent
 import com.apero.sample.ui.theme.ColorBackground
 import com.apero.sample.ui.theme.FontMedium
 import com.apero.sample.ui.theme.FontRegular
@@ -65,6 +66,7 @@ fun OnBoardingRoute(
             }
         }
     }
+    TrackScreenViewEvent(screenName = "OnBoarding")
     OnBoardingScreen(
         onNavigateToHome = {
             vm.makeOpenedOnBoarding()

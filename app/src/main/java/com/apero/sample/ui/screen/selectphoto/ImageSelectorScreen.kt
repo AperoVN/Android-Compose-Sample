@@ -2,7 +2,6 @@ package com.apero.sample.ui.screen.selectphoto
 
 import android.Manifest
 import android.os.Build
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -28,15 +27,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
 import com.apero.sample.R
 import com.apero.sample.data.model.AlbumMedia
 import com.apero.sample.data.model.MediaModel
@@ -46,7 +41,7 @@ import com.apero.sample.ui.component.ImageLoader
 import com.apero.sample.ui.component.LoadingDialog
 import com.apero.sample.ui.component.SpinnerDefault
 import com.apero.sample.ui.component.ToolbarDefault
-import com.apero.sample.ui.theme.DefaultTextStyleContent
+import com.apero.sample.ui.screen.TrackScreenViewEvent
 import com.apero.sample.ui.theme.DefaultTextStyleTitle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -59,13 +54,6 @@ fun ImageSelectorRoute(
     onNavigateToPreview: suspend (data: MediaModel) -> Unit,
     onOpenSettingApp: () -> Unit
 ) {
-    val listImageSample: List<Painter> = listOf(
-        painterResource(R.drawable.img_sample_photo_1),
-        painterResource(R.drawable.img_sample_photo_2),
-        painterResource(R.drawable.img_sample_photo_3),
-        painterResource(R.drawable.img_sample_photo_4)
-    )
-
     val mediaPermissionsState = rememberMultiplePermissionsState(
         listOf(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -88,13 +76,12 @@ fun ImageSelectorRoute(
     if (uiState.isLoading) {
         LoadingDialog(onDismiss = {})
     }
-
+    TrackScreenViewEvent(screenName = "Select Image")
     ImageSelectorScreen(
         onNavigateUp = onNavigateUp,
         onNavigateToPreview = {
             vm.selectMedia(it)
         },
-        listImageSample = listImageSample,
         uiState = uiState,
         onSelectMedia = {
             vm.updateMediaSelected(it)
@@ -117,13 +104,11 @@ fun ImageSelectorRoute(
 fun ImageSelectorScreen(
     onNavigateUp: () -> Unit,
     onNavigateToPreview: (MediaModel?) -> Unit,
-    listImageSample: List<Painter>,
     uiState: ImageSelectorUiState,
     onSelectAlbum: (album: AlbumMedia) -> Unit,
     onSelectMedia: (MediaModel) -> Unit,
     onRequestPermission: () -> Unit
 ) {
-    val spanCountSample = 4
     val spanCountYourPhoto = 3
 
     Column(
@@ -164,12 +149,6 @@ fun ImageSelectorScreen(
             },
         )
 
-        Spacer(modifier = Modifier.height(12.dp))
-        ImageSelectorSample(
-            modifier = Modifier.padding(horizontal = 12.dp),
-            listImageSample = listImageSample,
-            spanCount = spanCountSample
-        )
         Spacer(modifier = Modifier.height(12.dp))
 
         ImageSelectorList(
@@ -263,71 +242,11 @@ fun ImageSelectorList(
     }
 }
 
-@Composable
-fun ImageSelectorSample(modifier: Modifier, listImageSample: List<Painter>, spanCount: Int) {
-    Column(modifier = modifier) {
-        Text(
-            text = stringResource(R.string.select_photo_sample_photo),
-            style = DefaultTextStyleTitle
-        )
-        Spacer(modifier = modifier.height(8.dp))
-        Text(
-            text = stringResource(R.string.select_photo_sample_content),
-            style = DefaultTextStyleContent
-        )
-        Spacer(modifier = modifier.height(8.dp))
-        LazyVerticalGrid(modifier = Modifier, columns = GridCells.Fixed(spanCount)) {
-            items(listImageSample.size) { index ->
-                ConstraintLayout(
-                    modifier = Modifier
-                        .padding(4.dp)
-                        .aspectRatio(1f)
-                        .clip(RoundedCornerShape(8.dp))
-                ) {
-                    val (imageSample, textSample) = createRefs()
-
-                    Image(
-                        modifier = Modifier
-                            .constrainAs(imageSample) {}
-                            .fillMaxWidth(),
-                        painter = listImageSample[index],
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Text(
-                        text = stringResource(R.string.select_photo_sample),
-                        Modifier
-                            .fillMaxWidth()
-                            .constrainAs(textSample) {
-                                start.linkTo(parent.start)
-                                end.linkTo(parent.end)
-                                bottom.linkTo(parent.bottom)
-                            }
-                            .padding(8.dp),
-                        style = DefaultTextStyleContent,
-                        maxLines = 1,
-                        textAlign = TextAlign.Center,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-
-            }
-        }
-    }
-}
-
 @Preview
 @Composable
 fun ImageSelectorPreview() {
     ImageSelectorScreen(onNavigateUp = {},
         onNavigateToPreview = {},
-        listImageSample = listOf(
-            painterResource(R.drawable.img_sample_photo_1),
-            painterResource(R.drawable.img_sample_photo_2),
-            painterResource(R.drawable.img_sample_photo_3),
-            painterResource(R.drawable.img_sample_photo_4)
-        ),
         uiState = ImageSelectorUiState(hasPermission = true, albumSelected = AlbumMedia.mock()),
         onSelectMedia = {},
         onSelectAlbum = {},
@@ -339,12 +258,7 @@ fun ImageSelectorPreview() {
 fun ImageSelectorNotPermissionPreview() {
     ImageSelectorScreen(onNavigateUp = {},
         onNavigateToPreview = {},
-        listImageSample = listOf(
-            painterResource(R.drawable.img_sample_photo_1),
-            painterResource(R.drawable.img_sample_photo_2),
-            painterResource(R.drawable.img_sample_photo_3),
-            painterResource(R.drawable.img_sample_photo_4)
-        ), uiState = ImageSelectorUiState(),
+        uiState = ImageSelectorUiState(),
         onSelectAlbum = {},
         onSelectMedia = {},
         onRequestPermission = {})
@@ -355,12 +269,6 @@ fun ImageSelectorNotPermissionPreview() {
 fun ImageSelectorEmptyPicturePreview() {
     ImageSelectorScreen(onNavigateUp = {},
         onNavigateToPreview = {},
-        listImageSample = listOf(
-            painterResource(R.drawable.img_sample_photo_1),
-            painterResource(R.drawable.img_sample_photo_2),
-            painterResource(R.drawable.img_sample_photo_3),
-            painterResource(R.drawable.img_sample_photo_4)
-        ),
         uiState = ImageSelectorUiState(hasPermission = true),
         onSelectMedia = {},
         onSelectAlbum = {},

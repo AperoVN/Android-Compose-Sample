@@ -37,6 +37,7 @@ import com.apero.sample.ui.theme.ColorTextPrimary
 import com.apero.sample.ui.theme.ColorTextSecondary
 import com.apero.sample.ui.theme.FontMedium
 import com.apero.sample.ui.theme.FontRegular
+import com.apero.sample.ui.screen.TrackScreenViewEvent
 
 @Composable
 fun SettingRoute(
@@ -45,6 +46,7 @@ fun SettingRoute(
     onNavigateToLanguage: () -> Unit
 ) {
     val settingUiState by viewModel.settingUiState.collectAsState()
+    TrackScreenViewEvent(screenName = "Setting")
     SettingScreen(
         settingUiState = settingUiState,
         onNavigationUp = onNavigationUp,

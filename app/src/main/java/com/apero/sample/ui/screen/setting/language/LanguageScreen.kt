@@ -34,6 +34,7 @@ import com.apero.sample.R
 import com.apero.sample.data.model.Language
 import com.apero.sample.ui.component.ToolbarDefault
 import com.apero.sample.ui.component.ToolbarTitleAlignment
+import com.apero.sample.ui.screen.TrackScreenViewEvent
 
 @Composable
 fun LanguageRouter(
@@ -42,6 +43,11 @@ fun LanguageRouter(
     onNavigateNext: () -> Unit
 ) {
     val languageUiState by viewModel.languageUiState.collectAsState()
+    val isLanguageFirstOpen by viewModel.needOpenLanguage.collectAsState(initial = null)
+    if (isLanguageFirstOpen != null) {
+        val screenName = if (isLanguageFirstOpen != false) "LanguageFirstOpen" else "Language"
+        TrackScreenViewEvent(screenName = screenName)
+    }
     LanguageScreen(
         languageUiState = languageUiState,
         onNavigateUp = onNavigateUp,

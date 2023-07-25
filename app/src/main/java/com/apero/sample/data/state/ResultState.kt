@@ -50,6 +50,12 @@ sealed interface ResultState<T> {
         return this
     }
 
+    fun onEach(block: (result: ResultState<T>) -> Unit): ResultState<T> {
+        block(this)
+        return this
+    }
+
+
     fun onSuccessNonData(success: (data: T?) -> Unit): ResultState<T> {
         when (this) {
             is Success -> success(data)

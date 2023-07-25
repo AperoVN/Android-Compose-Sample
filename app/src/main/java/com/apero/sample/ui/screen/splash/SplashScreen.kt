@@ -27,6 +27,7 @@ import com.apero.sample.R
 import com.apero.sample.ui.screen.splash.navigation.SplashDirectionType
 import com.apero.sample.ui.theme.ColorsGradient
 import com.apero.sample.ui.theme.FontMedium
+import com.apero.sample.ui.screen.TrackScreenViewEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 
@@ -49,6 +50,7 @@ fun SplashRoute(
         delay(2000)
         viewModel.typeDirectionState.first().let(onNavigateNextScreen)
     }
+    TrackScreenViewEvent(screenName = "Splash")
     SplashScreen()
 }
 

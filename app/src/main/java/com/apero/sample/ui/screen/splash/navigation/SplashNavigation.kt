@@ -11,7 +11,6 @@ import com.apero.sample.ui.AppState
 import com.apero.sample.ui.screen.home.navigation.navigateToHome
 import com.apero.sample.ui.screen.onboarding.navigation.navigateToOnBoarding
 import com.apero.sample.ui.screen.setting.language.navigation.navigateToLanguage
-import com.apero.sample.ui.screen.setting.navigation.navigateToSetting
 import com.apero.sample.ui.screen.splash.SplashRoute
 
 /**
