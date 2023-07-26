@@ -9,6 +9,7 @@ import retrofit2.Response
 /**
  * Created by KO Huyn.
  */
+@Deprecated("use CallError instead")
 sealed class FailureState {
     abstract fun toUiState(): FailureUi
     data class ServerError<T>(val response: Response<T>) : FailureState() {

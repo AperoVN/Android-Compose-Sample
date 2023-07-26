@@ -1,9 +1,46 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        accompanist_placeholder_version = "0.28.0"
+        accompanist_version = "0.30.1"
+        activity_compose_version = "1.7.2"
+        androidx_junit_version = "1.1.5"
+        arrow_version = "1.2.0"
+        coil_version = "2.4.0"
+        compile_sdk_version = 33
+        compose_bom_version = "2022.10.00"
+        compose_compiler_version = "1.4.7"
+        constraintlayout_compose_version = "1.0.1"
+        core_version = "1.10.1"
+        datastore_perferences_version = "1.0.0"
+        espresso_version = "3.5.1"
+        firebase_bom_version = "31.0.1"
+        gson_version = "2.10.1"
+        hilt_compiler_version = "1.0.0"
+        hilt_navigation_compose_version = "1.1.0-alpha01"
+        hilt_work_version = "1.0.0"
+        hilt_version = "2.46.1"
+        java_target_version = JavaVersion.VERSION_17
+        junit_version = "4.13.2"
+        lifecycle_version = "2.6.1"
+        lottie_version = "6.0.1"
+        material3_version = "1.1.1"
+        min_sdk_version = 24
+        navigation_compose_version = "2.6.0"
+        okhttp3_version = "4.11.0"
+        retrofit_version = "2.9.0"
+        room_version = "2.5.2"
+        target_sdk_version = 33
+        work_version = "2.8.1"
+    }
+}
+
 plugins {
-    id 'com.android.application' version '8.0.0' apply false
-    id 'com.android.library' version '8.0.0' apply false
-    id 'org.jetbrains.kotlin.android' version '1.8.21' apply false
-    id 'com.google.dagger.hilt.android' version '2.44' apply false
-    id 'com.google.gms.google-services' version "4.3.15" apply false
-    id 'com.google.firebase.crashlytics' version "2.9.6" apply false
+    id "com.android.application" version "8.0.0" apply false
+    id "com.android.library" version "8.0.0" apply false
+    id "com.google.dagger.hilt.android" version "2.44" apply false
+    id "com.google.devtools.ksp" version "1.8.21-1.0.11" apply false // map with kotlin version
+    id "com.google.firebase.crashlytics" version "2.9.6" apply false
+    id "com.google.gms.google-services" version "4.3.15" apply false
+    id "org.jetbrains.kotlin.android" version "1.8.21" apply false
 }

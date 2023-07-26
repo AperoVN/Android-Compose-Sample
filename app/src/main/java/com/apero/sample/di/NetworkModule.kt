@@ -1,6 +1,7 @@
 package com.apero.sample.di
 
 import android.content.Context
+import arrow.retrofit.adapter.either.EitherCallAdapterFactory
 import coil.ImageLoader
 import com.apero.sample.BuildConfig
 import com.apero.sample.data.network.ApiService
@@ -68,6 +69,7 @@ object NetworkModule {
             )
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(EitherCallAdapterFactory.create())
             .build()
             .create(ApiService::class.java)
     }
