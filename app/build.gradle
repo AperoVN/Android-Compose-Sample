@@ -84,57 +84,48 @@ android {
 }
 
 dependencies {
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation "androidx.activity:activity-compose:$activity_compose_version"
+    androidTestImplementation platform("androidx.compose:compose-bom:$compose_bom_version")
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+
+    debugImplementation "androidx.compose.ui:ui-test-manifest"
+    debugImplementation "androidx.compose.ui:ui-tooling"
+
     implementation platform("androidx.compose:compose-bom:$compose_bom_version")
+    implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
+    implementation "androidx.activity:activity-compose:$activity_compose_version"
+    implementation "androidx.compose.material3:material3:$material3_version"
     implementation "androidx.compose.ui:ui"
     implementation "androidx.compose.ui:ui-graphics"
     implementation "androidx.compose.ui:ui-tooling-preview"
-    implementation "androidx.compose.material3:material3:$material3_version"
-    implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-    androidTestImplementation platform("androidx.compose:compose-bom:$compose_bom_version")
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4"
-    debugImplementation "androidx.compose.ui:ui-tooling"
-    debugImplementation "androidx.compose.ui:ui-test-manifest"
     implementation "androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version"
-    //accompanist
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation "androidx.core:core-ktx:$core_version"
+    implementation "androidx.datastore:datastore-preferences:$datastore_perferences_version"
+    implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
+    implementation "androidx.hilt:hilt-work:$hilt_work_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "com.airbnb.android:lottie-compose:$lottie_version"
     implementation "com.google.accompanist:accompanist-permissions:$accompanist_version"
     implementation "com.google.accompanist:accompanist-placeholder:$accompanist_placeholder_version"
-    //image loader
-    implementation "io.coil-kt:coil-compose:$coil_version"
-    //DI hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
-    implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
-    //networking
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
-    //shared preference migrate to data store
-    implementation "androidx.datastore:datastore-preferences:$datastore_perferences_version"
-    //database
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    //data store
-    implementation "androidx.datastore:datastore-preferences:$datastore_perferences_version"
-    //deserialize/serialize
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     implementation "com.google.code.gson:gson:$gson_version"
-    //lottie
-    implementation "com.airbnb.android:lottie-compose:$lottie_version"
-    //firebase
-    implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
+    implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "com.google.firebase:firebase-analytics"
-    implementation "com.google.firebase:firebase-crashlytics"
     implementation "com.google.firebase:firebase-config-ktx"
-    //worker
-    implementation "androidx.work:work-runtime-ktx:$work_version"
-    implementation "androidx.hilt:hilt-work:$hilt_work_version"
-    kapt "androidx.hilt:hilt-compiler:$hilt_compiler_version"
+    implementation "com.google.firebase:firebase-crashlytics"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation "io.coil-kt:coil-compose:$coil_version"
 
+    kapt "androidx.hilt:hilt-compiler:$hilt_compiler_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+
+    testImplementation "junit:junit:$junit_version"
 }
