@@ -11,6 +11,7 @@ import retrofit2.http.Query
 /**
  * Created by KO Huyn.
  */
+// FIXME: rename to TmdbApiService (The Movie DB) & move to com.apero.data.network.tmdb
 interface ApiService {
     @GET("movie/popular")
     suspend fun getMoviePopular(
