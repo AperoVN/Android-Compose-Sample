@@ -3,6 +3,7 @@ package com.apero.sample.ui.screen.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import arrow.core.getOrElse
 import com.apero.sample.data.model.Movie
 import com.apero.sample.data.network.monitor.INetworkMonitor
 import com.apero.sample.data.network.request.MoviePopularRequest
@@ -63,7 +64,7 @@ class HomeViewModel @Inject constructor(
             _uiState.update { it.copy(pagingMovie = it.createLoading(page)) }
 
             movieRepository.getListMoviePopular(MoviePopularRequest(page))
-                .onSuccess { paging ->
+                .onRight { paging ->
                     _uiState.update {
                         if (paging.page == null || paging.page == 1) {
                             it.copy(listMovie = paging.list)
@@ -74,7 +75,7 @@ class HomeViewModel @Inject constructor(
                 }
                 .getOrElse { failureState ->
                     uiState.value.pagingMovie.copy(
-                        pagingState = PagingState.createError(page, failureState)
+                        pagingState = PagingState.createError(page, TODO("convert CallError to FailureState"))
                     )
                 }.let { paging ->
                     _uiState.update { it.copy(pagingMovie = paging) }
