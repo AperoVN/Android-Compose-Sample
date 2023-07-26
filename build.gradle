@@ -6,7 +6,9 @@ buildscript {
         activity_compose_version = "1.7.2"
         androidx_junit_version = "1.1.5"
         coil_version = "2.4.0"
+        compile_sdk_version = 33
         compose_bom_version = "2022.10.00"
+        compose_compiler_version = "1.4.7"
         constraintlayout_compose_version = "1.0.1"
         core_version = "1.10.1"
         datastore_perferences_version = "1.0.0"
@@ -17,14 +19,17 @@ buildscript {
         hilt_navigation_compose_version = "1.1.0-alpha01"
         hilt_work_version = "1.0.0"
         hilt_version = "2.46.1"
+        java_target_version = JavaVersion.VERSION_17
         junit_version = "4.13.2"
         lifecycle_version = "2.6.1"
         lottie_version = "6.0.1"
         material3_version = "1.1.1"
+        min_sdk_version = 24
         navigation_compose_version = "2.6.0"
         okhttp3_version = "4.11.0"
         retrofit_version = "2.9.0"
         room_version = "2.5.2"
+        target_sdk_version = 33
         work_version = "2.8.1"
     }
 }

@@ -11,12 +11,12 @@ def appName = "Compose Sample"
 
 android {
     namespace "com.apero.sample"
-    compileSdk 33
+    compileSdk compile_sdk_version
 
     defaultConfig {
         applicationId "com.apero.sample"
-        minSdk 24
-        targetSdk 33
+        minSdk min_sdk_version
+        targetSdk target_sdk_version
         versionCode 1
         versionName "1.0"
 
@@ -49,18 +49,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility java_target_version
+        targetCompatibility java_target_version
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = java_target_version.toString()
     }
     buildFeatures {
         compose true
         buildConfig true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion "1.4.7"
+        kotlinCompilerExtensionVersion compose_compiler_version
     }
     packagingOptions {
         resources {
