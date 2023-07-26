@@ -110,6 +110,8 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-core-retrofit:$arrow_version"
     implementation "com.airbnb.android:lottie-compose:$lottie_version"
     implementation "com.google.accompanist:accompanist-permissions:$accompanist_version"
     implementation "com.google.accompanist:accompanist-placeholder:$accompanist_placeholder_version"
