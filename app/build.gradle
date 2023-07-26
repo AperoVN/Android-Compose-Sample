@@ -67,7 +67,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    flavorDimensions "default"
+    flavorDimensions = ["default"]
     productFlavors {
         appDev {
             buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
