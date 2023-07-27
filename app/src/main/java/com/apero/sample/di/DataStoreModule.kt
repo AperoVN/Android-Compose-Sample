@@ -4,8 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.apero.sample.data.prefs.app.IAppDataStore
-import com.apero.sample.data.prefs.app.AppDataStoreImpl
+import com.apero.sample.data.prefs.app.DatastoreAcsAppPreferences
 import com.apero.sample.data.prefs.remoteconfig.IRemoteConfigDataStore
 import com.apero.sample.data.prefs.remoteconfig.RemoteConfigDataStoreImpl
 import com.apero.sample.di.qualifier.AppDataStore
@@ -18,7 +17,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
- * Created by KO Huyn.
+ * @author KO Huyn
  */
 @Module
 @InstallIn(SingletonComponent::class)
@@ -39,8 +38,8 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideIAppDataStore(@AppDataStore dataStore: DataStore<Preferences>): IAppDataStore {
-        return AppDataStoreImpl(dataStore)
+    fun provideIAppDataStore(@AppDataStore dataStore: DataStore<Preferences>): com.apero.sample.data.prefs.app.AcsAppPreferences {
+        return DatastoreAcsAppPreferences(dataStore)
     }
 
     @Provides

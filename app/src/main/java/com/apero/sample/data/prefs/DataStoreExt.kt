@@ -9,10 +9,9 @@ import kotlinx.coroutines.flow.map
 import java.io.IOException
 
 /**
- * Created by KO Huyn.
+ * @author KO Huyn
  */
-
-fun <T> DataStore<Preferences>.get(preferencesKey: Preferences.Key<T>): Flow<T?> {
+operator fun <T> DataStore<Preferences>.get(preferencesKey: Preferences.Key<T>): Flow<T?> {
     return data
         .catch { exception ->
             // dataStore.data throws an IOException when an error is encountered when reading data

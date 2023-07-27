@@ -2,7 +2,7 @@ package com.apero.sample.di
 
 import com.apero.sample.analytics.AnalyticsHelper
 import com.apero.sample.data.network.ApiService
-import com.apero.sample.data.prefs.app.IAppDataStore
+import com.apero.sample.data.prefs.app.AcsAppPreferences
 import com.apero.sample.data.repository.common.CommonRepositoryImpl
 import com.apero.sample.data.repository.common.ICommonRepository
 import com.apero.sample.data.repository.movie.IMovieRepository
@@ -13,7 +13,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 
 /**
- * Created by KO Huyn.
+ * @author KO Huyn.
  */
 @Module
 @InstallIn(ViewModelComponent::class)
@@ -22,13 +22,13 @@ object RepositoryModule {
     @Provides
     fun provideMovieRepository(
         apiService: ApiService,
-        analyticsHelper: AnalyticsHelper
+        analyticsHelper: AnalyticsHelper,
     ): IMovieRepository {
         return MovieRepositoryImpl(apiService, analyticsHelper)
     }
 
     @Provides
-    fun provideCommonRepository(dataStore: IAppDataStore): ICommonRepository {
+    fun provideCommonRepository(dataStore: AcsAppPreferences): ICommonRepository {
         return CommonRepositoryImpl(dataStore)
     }
 }

@@ -9,7 +9,7 @@ import com.apero.sample.data.network.interceptor.ParamsInterceptor
 import com.apero.sample.data.network.interceptor.RequestInterceptor
 import com.apero.sample.data.network.monitor.NetworkMonitorImpl
 import com.apero.sample.data.network.monitor.INetworkMonitor
-import com.apero.sample.data.prefs.app.IAppDataStore
+import com.apero.sample.data.prefs.app.AcsAppPreferences
 import com.apero.sample.di.qualifier.ApiKey
 import com.apero.sample.di.qualifier.BaseUrl
 import dagger.Module
@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 /**
- * Created by KO Huyn.
+ * @author KO Huyn.
  */
 @Module
 @InstallIn(SingletonComponent::class)
@@ -59,12 +59,12 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
         @BaseUrl url: String,
         @ApiKey apiKey: String,
-        appDataStore: IAppDataStore
+        acsAppPreferences: AcsAppPreferences
     ): ApiService {
         return Retrofit.Builder()
             .client(
                 okHttpClient.newBuilder()
-                    .addInterceptor(ParamsInterceptor(apiKey = apiKey, appDataStore = appDataStore))
+                    .addInterceptor(ParamsInterceptor(apiKey = apiKey, acsAppPreferences = acsAppPreferences))
                     .build()
             )
             .baseUrl(url)

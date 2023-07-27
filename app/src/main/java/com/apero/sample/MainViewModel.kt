@@ -1,11 +1,11 @@
 package com.apero.sample
 
 import androidx.lifecycle.ViewModel
-import com.apero.sample.data.prefs.app.IAppDataStore
+import com.apero.sample.data.prefs.app.AcsAppPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(dataStore: IAppDataStore): ViewModel() {
-    val languageState = dataStore.currentLanguage()
+class MainViewModel @Inject constructor(dataStore: AcsAppPreferences): ViewModel() {
+    val languageState = dataStore.currentLanguage
 }

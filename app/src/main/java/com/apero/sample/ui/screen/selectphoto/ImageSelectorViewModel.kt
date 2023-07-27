@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apero.sample.data.model.AlbumMedia
 import com.apero.sample.data.model.MediaModel
-import com.apero.sample.data.prefs.app.IAppDataStore
+import com.apero.sample.data.prefs.app.AcsAppPreferences
 import com.apero.sample.data.provider.media.MediaProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +26,7 @@ import javax.inject.Inject
 class ImageSelectorViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val mediaProvider: MediaProvider,
-    private val dataStore: IAppDataStore
+    private val dataStore: AcsAppPreferences
 ) : ViewModel() {
 
     private val _imageSelectorUiState = MutableStateFlow(ImageSelectorUiState())
@@ -37,7 +37,7 @@ class ImageSelectorViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            dataStore.isFirstTimeAskingPermission().distinctUntilChanged()
+            dataStore.isFirstTimeAskingPermission.distinctUntilChanged()
                 .collectLatest { isFirstRequestPermission ->
                     _imageSelectorUiState.update { it.copy(isFirstTimeAskPermission = isFirstRequestPermission) }
                 }

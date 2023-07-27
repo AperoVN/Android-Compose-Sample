@@ -1,25 +1,26 @@
 package com.apero.sample.data.repository.common
 
 import com.apero.sample.data.model.Language
-import com.apero.sample.data.prefs.app.IAppDataStore
+import com.apero.sample.data.prefs.app.AcsAppPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
 
 /**
- * Created by KO Huyn on 24/07/2023.
+ * @author KO Huyn
+ * @since 24/07/2023
  */
-class CommonRepositoryImpl(private val dataStore: IAppDataStore) : ICommonRepository {
+class CommonRepositoryImpl(private val dataStore: AcsAppPreferences) : ICommonRepository {
     override fun getLanguage(): Flow<Language> {
-        return dataStore.currentLanguage().mapNotNull { Language.findFromCountryCode(it) }
+        return dataStore.currentLanguage.mapNotNull { Language.findFromCountryCode(it) }
     }
 
     override fun needOpenOnBoarding(): Flow<Boolean> {
-        return dataStore.isOnboardOpened().map { it.not() }
+        return dataStore.isOnboardOpened.map { it.not() }
     }
 
     override fun needOpenFirstLanguage(): Flow<Boolean> {
-        return dataStore.isLanguageOpened().map { it.not() }
+        return dataStore.isLanguageOpened.map { it.not() }
     }
 
     override suspend fun saveLanguage(language: Language) {

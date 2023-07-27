@@ -3,15 +3,24 @@ package com.apero.sample.data.prefs.app
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Created by KO Huyn.
+ * Android-Compose-Sample App's Preferences
+ *
+ * @author KO Huyn.
  */
-interface IAppDataStore {
-    fun isOnboardOpened(): Flow<Boolean>
+interface AcsAppPreferences {
+    val isOnboardOpened: Flow<Boolean>
+
     suspend fun setOnboardOpened(isFirst: Boolean)
-    fun isLanguageOpened(): Flow<Boolean>
+
+    val isLanguageOpened: Flow<Boolean>
+
     suspend fun setLanguageOpened(isFirst: Boolean)
-    fun currentLanguage(): Flow<String>
+
+    val currentLanguage: Flow<String>
+
     suspend fun setLanguage(language: String)
-    fun isFirstTimeAskingPermission(): Flow<Boolean>
+
+    val isFirstTimeAskingPermission: Flow<Boolean>
+
     suspend fun hasFirstTimeAskingPermissions()
 }
