@@ -5,7 +5,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.apero.sample.analytics.AnalyticsHelper
-import com.apero.sample.data.remoteconfig.IRemoteConfig
+import com.apero.sample.data.remoteconfig.RemoteConfigRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 
@@ -16,7 +16,7 @@ import dagger.assisted.AssistedInject
 class RemoteConfigSyncWorker @AssistedInject constructor(
     @Assisted context: Context,
     @Assisted params: WorkerParameters,
-    private val remoteConfig: IRemoteConfig,
+    private val remoteConfig: RemoteConfigRepository,
     private val analyticsHelper: AnalyticsHelper
 ) : CoroutineWorker(context, params) {
     override suspend fun doWork(): Result {

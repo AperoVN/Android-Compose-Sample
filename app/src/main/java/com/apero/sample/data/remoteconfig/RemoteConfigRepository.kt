@@ -3,9 +3,10 @@ package com.apero.sample.data.remoteconfig
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Created by KO Huyn on 14/07/2023.
+ * @author KO Huyn
+ * @since 14/07/2023.
  */
-interface IRemoteConfig {
+interface RemoteConfigRepository {
     suspend fun sync(): Boolean
     fun getSpanCountHome(): Flow<Int?>
 }

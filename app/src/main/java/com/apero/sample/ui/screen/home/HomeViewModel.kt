@@ -7,7 +7,7 @@ import arrow.core.getOrElse
 import com.apero.sample.data.model.Movie
 import com.apero.sample.data.network.monitor.INetworkMonitor
 import com.apero.sample.data.network.request.MoviePopularRequest
-import com.apero.sample.data.remoteconfig.IRemoteConfig
+import com.apero.sample.data.remoteconfig.RemoteConfigRepository
 import com.apero.sample.data.repository.common.ICommonRepository
 import com.apero.sample.data.repository.movie.IMovieRepository
 import com.apero.sample.data.state.FailureState
@@ -34,7 +34,7 @@ class HomeViewModel @Inject constructor(
     private val movieRepository: IMovieRepository,
     private val monitor: INetworkMonitor,
     private val commonRepository: ICommonRepository,
-    private val remoteConfig: IRemoteConfig
+    private val remoteConfig: RemoteConfigRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
