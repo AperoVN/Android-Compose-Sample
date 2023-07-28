@@ -10,8 +10,10 @@ import okhttp3.Response
  * @author KO Huyn
  * @since 21/07/2023.
  */
-class ParamsInterceptor(private val apiKey: String, private val acsAppPreferences: AcsAppPreferences) :
-    Interceptor {
+class TmdbRetrofitParamsInterceptor(
+    private val apiKey: String,
+    private val acsAppPreferences: AcsAppPreferences,
+) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val language = runBlocking { acsAppPreferences.currentLanguage.firstOrNull() }
         val originalRequest = chain.request()

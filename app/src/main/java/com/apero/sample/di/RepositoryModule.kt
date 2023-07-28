@@ -1,7 +1,7 @@
 package com.apero.sample.di
 
 import com.apero.sample.analytics.AnalyticsHelper
-import com.apero.sample.data.network.ApiService
+import com.apero.sample.data.network.TmdbApiService
 import com.apero.sample.data.prefs.app.AcsAppPreferences
 import com.apero.sample.data.repository.common.CommonRepositoryImpl
 import com.apero.sample.data.repository.common.ICommonRepository
@@ -21,10 +21,10 @@ object RepositoryModule {
 
     @Provides
     fun provideMovieRepository(
-        apiService: ApiService,
+        tmdbApiService: TmdbApiService,
         analyticsHelper: AnalyticsHelper,
     ): IMovieRepository {
-        return MovieRepositoryImpl(apiService, analyticsHelper)
+        return MovieRepositoryImpl(tmdbApiService, analyticsHelper)
     }
 
     @Provides

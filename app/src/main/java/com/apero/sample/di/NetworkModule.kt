@@ -4,9 +4,9 @@ import android.content.Context
 import arrow.retrofit.adapter.either.EitherCallAdapterFactory
 import coil.ImageLoader
 import com.apero.sample.BuildConfig
-import com.apero.sample.data.network.ApiService
-import com.apero.sample.data.network.interceptor.ParamsInterceptor
-import com.apero.sample.data.network.interceptor.RequestInterceptor
+import com.apero.sample.data.network.TmdbApiService
+import com.apero.sample.data.network.interceptor.TmdbRetrofitParamsInterceptor
+import com.apero.sample.data.network.interceptor.NetworkStatusRetrofitRequestInterceptor
 import com.apero.sample.data.network.monitor.NetworkMonitorImpl
 import com.apero.sample.data.network.monitor.INetworkMonitor
 import com.apero.sample.data.prefs.app.AcsAppPreferences
@@ -33,7 +33,7 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
         val builder = OkHttpClient.Builder()
-            .addInterceptor(RequestInterceptor(context))
+            .addInterceptor(NetworkStatusRetrofitRequestInterceptor(context))
         if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -60,18 +60,18 @@ object NetworkModule {
         @BaseUrl url: String,
         @ApiKey apiKey: String,
         acsAppPreferences: AcsAppPreferences
-    ): ApiService {
+    ): TmdbApiService {
         return Retrofit.Builder()
             .client(
                 okHttpClient.newBuilder()
-                    .addInterceptor(ParamsInterceptor(apiKey = apiKey, acsAppPreferences = acsAppPreferences))
+                    .addInterceptor(TmdbRetrofitParamsInterceptor(apiKey = apiKey, acsAppPreferences = acsAppPreferences))
                     .build()
             )
             .baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(EitherCallAdapterFactory.create())
             .build()
-            .create(ApiService::class.java)
+            .create(TmdbApiService::class.java)
     }
 
     @Provides
