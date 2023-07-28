@@ -8,7 +8,7 @@ import com.apero.sample.data.network.TmdbApiService
 import com.apero.sample.data.network.interceptor.TmdbRetrofitParamsInterceptor
 import com.apero.sample.data.network.interceptor.NetworkStatusRetrofitRequestInterceptor
 import com.apero.sample.data.network.monitor.NetworkMonitorImpl
-import com.apero.sample.data.network.monitor.INetworkMonitor
+import com.apero.sample.data.network.monitor.NetworkMonitor
 import com.apero.sample.data.prefs.app.AcsAppPreferences
 import com.apero.sample.di.qualifier.ApiKey
 import com.apero.sample.di.qualifier.BaseUrl
@@ -31,9 +31,12 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient {
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context,
+        networkMonitor: NetworkMonitor,
+    ): OkHttpClient {
         val builder = OkHttpClient.Builder()
-            .addInterceptor(NetworkStatusRetrofitRequestInterceptor(context))
+            .addInterceptor(NetworkStatusRetrofitRequestInterceptor(networkMonitor))
         if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -75,8 +78,7 @@ object NetworkModule {
     }
 
     @Provides
-    @Singleton
-    fun provideNetworkMonitor(@ApplicationContext context: Context): INetworkMonitor {
-        return NetworkMonitorImpl(context)
-    }
+    fun provideNetworkMonitor(
+        impl: NetworkMonitorImpl,
+    ): NetworkMonitor = impl
 }

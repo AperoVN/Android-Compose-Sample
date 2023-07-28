@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import arrow.core.getOrElse
 import com.apero.sample.data.model.Movie
-import com.apero.sample.data.network.monitor.INetworkMonitor
+import com.apero.sample.data.network.monitor.NetworkMonitor
 import com.apero.sample.data.network.request.MoviePopularRequest
 import com.apero.sample.data.remoteconfig.RemoteConfigRepository
 import com.apero.sample.data.repository.common.ICommonRepository
@@ -32,7 +32,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val movieRepository: IMovieRepository,
-    private val monitor: INetworkMonitor,
+    private val monitor: NetworkMonitor,
     private val commonRepository: ICommonRepository,
     private val remoteConfig: RemoteConfigRepository
 ) : ViewModel() {
