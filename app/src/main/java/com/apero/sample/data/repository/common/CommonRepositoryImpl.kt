@@ -1,7 +1,7 @@
 package com.apero.sample.data.repository.common
 
 import com.apero.sample.data.model.Language
-import com.apero.sample.data.prefs.app.AcsAppPreferences
+import com.apero.sample.data.prefs.app.AppPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapNotNull
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.mapNotNull
  * @author KO Huyn
  * @since 24/07/2023
  */
-class CommonRepositoryImpl(private val dataStore: AcsAppPreferences) : ICommonRepository {
+class CommonRepositoryImpl(private val dataStore: AppPreferences) : ICommonRepository {
     override fun getLanguage(): Flow<Language> {
         return dataStore.currentLanguage.mapNotNull { Language.findFromCountryCode(it) }
     }

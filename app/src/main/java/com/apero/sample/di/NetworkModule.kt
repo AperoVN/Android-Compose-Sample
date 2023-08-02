@@ -9,7 +9,7 @@ import com.apero.sample.data.network.interceptor.TmdbRetrofitParamsInterceptor
 import com.apero.sample.data.network.interceptor.NetworkStatusRetrofitRequestInterceptor
 import com.apero.sample.data.network.monitor.NetworkMonitorImpl
 import com.apero.sample.data.network.monitor.NetworkMonitor
-import com.apero.sample.data.prefs.app.AcsAppPreferences
+import com.apero.sample.data.prefs.app.AppPreferences
 import com.apero.sample.di.qualifier.ApiKey
 import com.apero.sample.di.qualifier.BaseUrl
 import dagger.Module
@@ -62,12 +62,12 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
         @BaseUrl url: String,
         @ApiKey apiKey: String,
-        acsAppPreferences: AcsAppPreferences
+        appPreferences: AppPreferences
     ): TmdbApiService {
         return Retrofit.Builder()
             .client(
                 okHttpClient.newBuilder()
-                    .addInterceptor(TmdbRetrofitParamsInterceptor(apiKey = apiKey, acsAppPreferences = acsAppPreferences))
+                    .addInterceptor(TmdbRetrofitParamsInterceptor(apiKey = apiKey, appPreferences = appPreferences))
                     .build()
             )
             .baseUrl(url)

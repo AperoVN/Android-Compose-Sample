@@ -11,9 +11,9 @@ import kotlinx.coroutines.flow.map
 /**
  * @author KO Huyn
  */
-class DatastoreAcsAppPreferences(
+class DatastoreAppPreferences(
     private val dataStore: DataStore<Preferences>
-) : AcsAppPreferences {
+) : AppPreferences {
     override val isOnboardOpened: Flow<Boolean> =
         dataStore[AppPreferencesKeys.KEY_OPEN_ONBOARD_FIRST]
             .map { it ?: false }

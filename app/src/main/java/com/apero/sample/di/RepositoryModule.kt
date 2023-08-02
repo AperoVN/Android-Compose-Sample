@@ -2,7 +2,7 @@ package com.apero.sample.di
 
 import com.apero.sample.analytics.AnalyticsHelper
 import com.apero.sample.data.network.TmdbApiService
-import com.apero.sample.data.prefs.app.AcsAppPreferences
+import com.apero.sample.data.prefs.app.AppPreferences
 import com.apero.sample.data.repository.common.CommonRepositoryImpl
 import com.apero.sample.data.repository.common.ICommonRepository
 import com.apero.sample.data.repository.movie.IMovieRepository
@@ -28,7 +28,7 @@ object RepositoryModule {
     }
 
     @Provides
-    fun provideCommonRepository(dataStore: AcsAppPreferences): ICommonRepository {
+    fun provideCommonRepository(dataStore: AppPreferences): ICommonRepository {
         return CommonRepositoryImpl(dataStore)
     }
 }

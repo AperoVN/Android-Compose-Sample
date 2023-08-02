@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
  *
  * @author KO Huyn.
  */
-interface AcsAppPreferences {
+interface AppPreferences {
     val isOnboardOpened: Flow<Boolean>
 
     suspend fun setOnboardOpened(isFirst: Boolean)

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.apero.sample.data.prefs.app.DatastoreAcsAppPreferences
+import com.apero.sample.data.prefs.app.DatastoreAppPreferences
 import com.apero.sample.data.prefs.remoteconfig.IRemoteConfigDataStore
 import com.apero.sample.data.prefs.remoteconfig.RemoteConfigDataStoreImpl
 import com.apero.sample.di.qualifier.AppDataStore
@@ -38,8 +38,8 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideIAppDataStore(@AppDataStore dataStore: DataStore<Preferences>): com.apero.sample.data.prefs.app.AcsAppPreferences {
-        return DatastoreAcsAppPreferences(dataStore)
+    fun provideIAppDataStore(@AppDataStore dataStore: DataStore<Preferences>): com.apero.sample.data.prefs.app.AppPreferences {
+        return DatastoreAppPreferences(dataStore)
     }
 
     @Provides
