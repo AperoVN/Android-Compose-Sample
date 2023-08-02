@@ -1,9 +1,9 @@
 package com.apero.sample.di
 
-import com.apero.sample.BuildConfig
 import com.apero.sample.data.prefs.remoteconfig.IRemoteConfigDataStore
-import com.apero.sample.data.remoteconfig.FirebaseRemoteConfigImpl
-import com.apero.sample.data.remoteconfig.IRemoteConfig
+import com.apero.sample.data.remoteconfig.FirebaseRemoteConfigRepository
+import com.apero.sample.data.remoteconfig.RemoteConfigRepository
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.remoteConfig
@@ -33,10 +33,17 @@ object RemoteConfigModule {
 
     @Provides
     @Singleton
+    fun provideFirebaseCrashlytics(): FirebaseCrashlytics {
+        return FirebaseCrashlytics.getInstance()
+    }
+
+    @Provides
+    @Singleton
     fun provideRemoteConfig(
+        crashlytics: FirebaseCrashlytics,
         remoteConfig: FirebaseRemoteConfig,
-        dataStore: IRemoteConfigDataStore
-    ): IRemoteConfig {
-        return FirebaseRemoteConfigImpl(remoteConfig, dataStore)
+        dataStore: IRemoteConfigDataStore,
+    ): RemoteConfigRepository {
+        return FirebaseRemoteConfigRepository(crashlytics, remoteConfig, dataStore)
     }
 }

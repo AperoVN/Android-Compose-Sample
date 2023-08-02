@@ -3,22 +3,24 @@ package com.apero.sample.data.remoteconfig
 import android.util.Log
 import androidx.annotation.WorkerThread
 import com.apero.sample.data.prefs.remoteconfig.IRemoteConfigDataStore
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.ktx.get
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 
 /**
- * Created by KO Huyn on 14/07/2023.
+ * @author KO Huyn
+ * @since 14/07/2023.
  */
-class FirebaseRemoteConfigImpl(
+class FirebaseRemoteConfigRepository(
+    private val crashlytics: FirebaseCrashlytics,
     private val remoteConfig: FirebaseRemoteConfig,
     private val remoteConfigDataStore: IRemoteConfigDataStore
-) : IRemoteConfig {
-
+) : RemoteConfigRepository {
     @WorkerThread
     override suspend fun sync(): Boolean {
-        try {
+        return try {
             val isSuccess = remoteConfig.fetchAndActivate().await()
             if (isSuccess) {
                 remoteConfig[FirebaseRemoteConfigKey.SPAN_COUNT_HOME].asLong().let {
@@ -26,16 +28,22 @@ class FirebaseRemoteConfigImpl(
                 }
             }
             Log.d(
-                "FirebaseRemoteConfigImpl",
+                TAG,
                 "data: ${remoteConfig.all}"
             )
-            return true
+            true
         } catch (e: Exception) {
-            return false
+            crashlytics.recordException(e)
+            Log.e(TAG, "sync failed with error: ", e)
+            false
         }
     }
 
     override fun getSpanCountHome(): Flow<Int?> {
         return remoteConfigDataStore.getHomeSpanCount()
+    }
+
+    companion object {
+        private const val TAG = "FirebaseRemoteConfigImpl"
     }
 }
