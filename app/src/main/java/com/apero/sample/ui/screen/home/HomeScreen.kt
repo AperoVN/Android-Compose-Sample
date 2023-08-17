@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -63,7 +64,8 @@ fun HomeRoute(
     vm: HomeViewModel,
     onClickSetting: () -> Unit,
     onClickGallery: () -> Unit,
-    onClickMovieDetail: (movie: Movie) -> Unit
+    onClickMovieDetail: (movie: Movie) -> Unit,
+    onNavigateToPicker: () -> Unit,
 ) {
     val uiState by vm.uiState.collectAsState()
     val scrollState = rememberLazyGridState()
@@ -86,7 +88,8 @@ fun HomeRoute(
         scrollState = scrollState,
         onClickMovie = onClickMovieDetail,
         onClickSetting = onClickSetting,
-        onClickGallery = onClickGallery
+        onClickGallery = onClickGallery,
+        onNavigateToPicker = onNavigateToPicker,
     )
 }
 
@@ -97,6 +100,7 @@ fun HomeScreen(
     onClickMovie: (Movie) -> Unit,
     onClickSetting: () -> Unit,
     onClickGallery: () -> Unit,
+    onNavigateToPicker: () -> Unit,
 ) {
     val movies = uiState.listMovie
     val pagingState = uiState.pagingMovie.pagingState
@@ -134,6 +138,9 @@ fun HomeScreen(
                 )
             }
         )
+        Button(onClick = onNavigateToPicker) {
+            Text("PhotoPickerScreen")
+        }
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             LazyVerticalGrid(
                 modifier = Modifier.fillMaxSize(),
@@ -254,7 +261,8 @@ fun HomeScreenPreview() {
             uiState = HomeUiState.mock(),
             onClickMovie = {},
             onClickSetting = {},
-            onClickGallery = {}
+            onClickGallery = {},
+            onNavigateToPicker = { /* no-op */ },
         )
     }
 }

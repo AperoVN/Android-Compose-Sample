@@ -22,7 +22,8 @@ fun NavController.navigateToHome(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.homeScreen(
-    appState: AppState
+    appState: AppState,
+    onNavigateToPicker: () -> Unit,
 ) {
     composable(route = HomeNavigation.route) {
         HomeRoute(
@@ -35,7 +36,8 @@ fun NavGraphBuilder.homeScreen(
             },
             onClickMovieDetail = {
 //                appState.navController.navigateToSelectImage()
-            }
+            },
+            onNavigateToPicker = onNavigateToPicker,
         )
     }
 }
