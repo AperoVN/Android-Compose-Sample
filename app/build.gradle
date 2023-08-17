@@ -7,6 +7,7 @@ plugins {
     id "com.google.gms.google-services"
     id "kotlin-kapt"
     id "kotlin-parcelize"
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.8.21"
     id "org.jetbrains.kotlin.android"
 }
 def appName = "Compose Sample"
@@ -56,6 +57,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = java_target_version.toString()
+        freeCompilerArgs += [
+                "-Xcontext-receivers",
+        ]
     }
     buildFeatures {
         compose true
@@ -66,7 +70,10 @@ android {
     }
     packagingOptions {
         resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += [
+                    "/META-INF/{AL2.0,LGPL2.1}",
+                    "META-INF/versions/9/previous-compilation-data.bin",
+            ]
         }
     }
     flavorDimensions = ["default"]
@@ -110,8 +117,14 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "com.apero:core-common:$apero_core_version"
+    implementation "com.apero:core-mediapicker:$apero_core_version"
+    implementation "com.apero:core-media-store:$apero_core_version"
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.arrow-kt:arrow-core:$arrow_version"
     implementation "io.arrow-kt:arrow-core-retrofit:$arrow_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0-RC"
     implementation "com.airbnb.android:lottie-compose:$lottie_version"
     implementation "com.google.accompanist:accompanist-permissions:$accompanist_version"
     implementation "com.google.accompanist:accompanist-placeholder:$accompanist_placeholder_version"

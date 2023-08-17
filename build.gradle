@@ -5,9 +5,10 @@ buildscript {
         accompanist_version = "0.30.1"
         activity_compose_version = "1.7.2"
         androidx_junit_version = "1.1.5"
+        apero_core_version = "0.0.8-alpha01"
         arrow_version = "1.2.0"
         coil_version = "2.4.0"
-        compile_sdk_version = 33
+        compile_sdk_version = 34
         compose_bom_version = "2022.10.00"
         compose_compiler_version = "1.4.7"
         constraintlayout_compose_version = "1.0.1"
@@ -22,6 +23,7 @@ buildscript {
         hilt_version = "2.46.1"
         java_target_version = JavaVersion.VERSION_17
         junit_version = "4.13.2"
+        koin_version = "3.4.3"
         lifecycle_version = "2.6.1"
         lottie_version = "6.0.1"
         material3_version = "1.1.1"

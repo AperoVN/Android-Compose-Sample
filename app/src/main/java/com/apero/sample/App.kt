@@ -9,6 +9,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.apero.sample.worker.RemoteConfigSyncWorker
 import dagger.hilt.android.HiltAndroidApp
+import org.koin.core.KoinApplication
 import javax.inject.Inject
 
 /**
@@ -18,6 +19,9 @@ import javax.inject.Inject
 class App : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
+
+    @Inject
+    lateinit var koinApplication: KoinApplication
 
     override fun onCreate() {
         super.onCreate()

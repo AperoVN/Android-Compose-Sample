@@ -54,8 +54,8 @@ fun OnBoardingRoute(
     vm: OnboardViewModel,
     onNavigateToHome: () -> Unit,
 ) {
-    val pagerState = rememberPagerState()
     val listOnBoarding = LIST_ON_BOARDING
+    val pagerState = rememberPagerState { listOnBoarding.size }
     LaunchedEffect(Unit) {
         while (isActive) {
             delay(TIMEOUT_PAGER)
@@ -82,7 +82,7 @@ fun OnBoardingRoute(
 fun OnBoardingScreen(
     onNavigateToHome: () -> Unit,
     listOnBoarding: List<OnBoardingData> = LIST_ON_BOARDING,
-    pagerState: PagerState = rememberPagerState()
+    pagerState: PagerState = rememberPagerState { listOnBoarding.size },
 ) {
     Box(
         modifier = Modifier
@@ -91,7 +91,6 @@ fun OnBoardingScreen(
     ) {
         HorizontalPager(
             modifier = Modifier.align(Alignment.BottomCenter),
-            pageCount = listOnBoarding.size,
             state = pagerState
         ) { index ->
             val data = listOnBoarding[index]

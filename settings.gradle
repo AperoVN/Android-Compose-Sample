@@ -13,6 +13,13 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
+        maven {
+            url = uri("https://artifactory.apero.vn/artifactory/gradle-release/")
+            credentials {
+                username = "reporeader"
+                password = "apero@123"
+            }
+        }
 
     }
 }
