@@ -44,10 +44,6 @@
             <meta-data
                 android:name="com.apero.sample.startup.KoinStartup"
                 android:value="androidx.startup" />
-<!--            <meta-data-->
-<!--                android:name="androidx.work.WorkManagerInitializer"-->
-<!--                android:value="androidx.startup"-->
-<!--                tools:node="remove" />-->
             <meta-data
                 android:name="com.apero.sample.startup.SyncRemoteConfigStartup"
                 android:value="androidx.startup" />

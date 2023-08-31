@@ -1,24 +1,24 @@
 package com.apero.sample.worker
 
 import android.content.Context
-import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.apero.sample.analytics.AnalyticsHelper
 import com.apero.sample.data.remoteconfig.RemoteConfigRepository
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedInject
+import org.koin.compose.koinInject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * Created by KO Huyn on 14/07/2023.
  */
-@HiltWorker
-class RemoteConfigSyncWorker @AssistedInject constructor(
-    @Assisted context: Context,
-    @Assisted params: WorkerParameters,
-    private val remoteConfig: RemoteConfigRepository,
-    private val analyticsHelper: AnalyticsHelper
-) : CoroutineWorker(context, params) {
+class RemoteConfigSyncWorker(
+    context: Context,
+    params: WorkerParameters,
+) : CoroutineWorker(context, params), KoinComponent {
+
+    private val remoteConfig: RemoteConfigRepository by inject()
+    private val analyticsHelper: AnalyticsHelper by inject()
     override suspend fun doWork(): Result {
         analyticsHelper.logSyncStarted()
         remoteConfig.sync().also { success ->
