@@ -2,6 +2,7 @@ package com.apero.sample.ui.compose.screen.setting.language.navigation
 
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -14,6 +15,7 @@ import com.apero.sample.ui.compose.screen.setting.language.LanguageRouter
 import com.apero.sample.ui.compose.screen.setting.language.LanguageViewModel
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 fun NavController.navigateToLanguage(
     navOptions: NavOptions? = null
@@ -23,7 +25,7 @@ fun NavController.navigateToLanguage(
 
 fun NavGraphBuilder.languageScreen(appState: AppState) {
     composable(route = LanguageNavigation.route) {
-        val vm: LanguageViewModel = hiltViewModel()
+        val vm: LanguageViewModel = koinViewModel()
         val coroutineScope = rememberCoroutineScope()
         LanguageRouter(
             viewModel = vm,

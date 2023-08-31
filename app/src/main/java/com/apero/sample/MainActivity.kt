@@ -24,16 +24,13 @@ import com.apero.sample.ui.compose.theme.ColorPrimary
 import com.apero.sample.ui.compose.utils.UpdateLanguage
 import com.apero.sample.ui.compose.utils.ifOrIgnore
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModel()
 
-    @Inject
-    lateinit var analyticsHelper: AnalyticsHelper
-
+    private val analyticsHelper: AnalyticsHelper by inject()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

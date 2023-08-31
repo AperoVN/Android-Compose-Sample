@@ -8,15 +8,14 @@ import com.apero.sample.BuildConfig
 import com.apero.sample.R
 import com.apero.sample.data.repository.common.ICommonRepository
 import com.apero.sample.data.state.UiText
-import dagger.hilt.android.lifecycle.HiltViewModel
+
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
-@HiltViewModel
-class SettingViewModel @Inject constructor(commonRepository: ICommonRepository) : ViewModel() {
+class SettingViewModel(commonRepository: ICommonRepository) : ViewModel() {
     private val listSettingState = flowOf(settingList)
     private val languageState = commonRepository.getLanguage()
 

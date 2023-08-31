@@ -7,7 +7,6 @@ import com.apero.sample.data.model.AlbumMedia
 import com.apero.sample.data.model.MediaModel
 import com.apero.sample.data.prefs.app.AppPreferences
 import com.apero.sample.data.provider.media.MediaProvider
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,9 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
-@HiltViewModel
-class ImageSelectorViewModel @Inject constructor(
+class ImageSelectorViewModel(
     savedStateHandle: SavedStateHandle,
     private val mediaProvider: MediaProvider,
     private val dataStore: AppPreferences

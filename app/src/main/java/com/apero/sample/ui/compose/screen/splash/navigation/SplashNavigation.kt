@@ -1,6 +1,7 @@
 package com.apero.sample.ui.compose.screen.splash.navigation
 
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -12,6 +13,7 @@ import com.apero.sample.ui.compose.screen.home.navigation.navigateToHome
 import com.apero.sample.ui.compose.screen.onboarding.navigation.navigateToOnBoarding
 import com.apero.sample.ui.compose.screen.setting.language.navigation.navigateToLanguage
 import com.apero.sample.ui.compose.screen.splash.SplashRoute
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * Created by KO Huyn.
@@ -24,7 +26,7 @@ fun NavController.navigateToSplash(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.splashScreen(appState: AppState) {
     composable(route = SplashNavigation.route) {
         SplashRoute(
-            viewModel = hiltViewModel(),
+            viewModel = koinViewModel(),
             onNavigateNextScreen = { type ->
                 val navOptions = NavOptions.Builder()
                     .setPopUpTo(SplashNavigation.route, inclusive = true)

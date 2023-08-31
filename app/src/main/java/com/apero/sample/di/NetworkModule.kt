@@ -1,84 +1,60 @@
 package com.apero.sample.di
 
-import android.content.Context
 import arrow.retrofit.adapter.either.EitherCallAdapterFactory
 import coil.ImageLoader
 import com.apero.sample.BuildConfig
 import com.apero.sample.data.network.TmdbApiService
-import com.apero.sample.data.network.interceptor.TmdbRetrofitParamsInterceptor
 import com.apero.sample.data.network.interceptor.NetworkStatusRetrofitRequestInterceptor
-import com.apero.sample.data.network.monitor.NetworkMonitorImpl
+import com.apero.sample.data.network.interceptor.TmdbRetrofitParamsInterceptor
 import com.apero.sample.data.network.monitor.NetworkMonitor
-import com.apero.sample.data.prefs.app.AppPreferences
-import com.apero.sample.di.qualifier.ApiKey
-import com.apero.sample.di.qualifier.BaseUrl
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
+import com.apero.sample.data.network.monitor.NetworkMonitorImpl
+import com.apero.sample.di.qualifier.UrlQualifier
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 /**
  * @author KO Huyn.
  */
-@Module
-@InstallIn(SingletonComponent::class)
-object NetworkModule {
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(
-        @ApplicationContext context: Context,
-        networkMonitor: NetworkMonitor,
-    ): OkHttpClient {
+
+val networkModule = module {
+    singleOf(::NetworkMonitorImpl) { bind<NetworkMonitor>() }
+    single {
         val builder = OkHttpClient.Builder()
-            .addInterceptor(NetworkStatusRetrofitRequestInterceptor(networkMonitor))
+            .addInterceptor(NetworkStatusRetrofitRequestInterceptor(get()))
         if (BuildConfig.DEBUG) {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             builder.addInterceptor(httpLoggingInterceptor)
         }
-        return builder.build()
+        builder.build()
     }
-
-    @Provides
-    @Singleton
-    fun provideImageLoader(
-        @ApplicationContext context: Context,
-        okHttpClient: OkHttpClient
-    ): ImageLoader {
-        return ImageLoader.Builder(context)
-            .okHttpClient { okHttpClient }
+    single {
+        ImageLoader.Builder(get())
+            .okHttpClient { get() }
             .build()
     }
 
-    @Provides
-    @Singleton
-    fun getApiService(
-        okHttpClient: OkHttpClient,
-        @BaseUrl url: String,
-        @ApiKey apiKey: String,
-        appPreferences: AppPreferences
-    ): TmdbApiService {
-        return Retrofit.Builder()
+    single<TmdbApiService> {
+        Retrofit.Builder()
             .client(
-                okHttpClient.newBuilder()
-                    .addInterceptor(TmdbRetrofitParamsInterceptor(apiKey = apiKey, appPreferences = appPreferences))
+                get<OkHttpClient>().newBuilder()
+                    .addInterceptor(
+                        TmdbRetrofitParamsInterceptor(
+                            apiKey = get(named(UrlQualifier.ApiKey)),
+                            appPreferences = get()
+                        )
+                    )
                     .build()
-            )
-            .baseUrl(url)
+            ).baseUrl(get<String>(named(UrlQualifier.BaseUrl)))
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(EitherCallAdapterFactory.create())
             .build()
             .create(TmdbApiService::class.java)
     }
-
-    @Provides
-    fun provideNetworkMonitor(
-        impl: NetworkMonitorImpl,
-    ): NetworkMonitor = impl
 }

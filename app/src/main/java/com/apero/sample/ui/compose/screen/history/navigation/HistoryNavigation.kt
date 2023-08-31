@@ -1,6 +1,7 @@
 package com.apero.sample.ui.compose.screen.history.navigation
 
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -9,6 +10,7 @@ import com.apero.sample.ui.compose.navigation.Route
 import com.apero.sample.ui.compose.navigation.controller.NavigationNoArg
 import com.apero.sample.ui.compose.AppState
 import com.apero.sample.ui.compose.screen.history.HistoryRoute
+import org.koin.androidx.compose.koinViewModel
 
 fun NavController.navigateToHistory(navOptions: NavOptions? = null) {
     this.navigate(HistoryNavigation.route, navOptions)
@@ -19,7 +21,7 @@ fun NavGraphBuilder.historyScreen(
 ) {
     composable(route = HistoryNavigation.route) {
         HistoryRoute(
-            viewModel = hiltViewModel(),
+            viewModel = koinViewModel(),
             onNavigateUp = { appState.navigateUp() }
         )
     }

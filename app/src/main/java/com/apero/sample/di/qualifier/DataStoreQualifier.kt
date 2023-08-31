@@ -12,3 +12,7 @@ annotation class AppDataStore
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class RemoteConfigDataStore
+
+enum class DataStoreQualifier {
+    AppDataStore, RemoteConfigDataStore
+}
