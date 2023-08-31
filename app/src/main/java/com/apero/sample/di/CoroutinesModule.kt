@@ -1,19 +1,10 @@
 package com.apero.sample.di
 
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object CoroutinesModule {
-    @Provides
-    @Singleton
-    fun provideAppCoroutineScope(): CoroutineScope {
-        return CoroutineScope(Dispatchers.Default)
-    }
+
+val coroutineModule = module {
+    single { CoroutineScope(Dispatchers.Default) }
 }

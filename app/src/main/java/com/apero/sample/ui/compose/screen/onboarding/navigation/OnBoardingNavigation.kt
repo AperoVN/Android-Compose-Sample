@@ -1,6 +1,5 @@
 package com.apero.sample.ui.compose.screen.onboarding.navigation
 
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -10,6 +9,7 @@ import com.apero.sample.ui.compose.navigation.controller.NavigationNoArg
 import com.apero.sample.ui.compose.AppState
 import com.apero.sample.ui.compose.screen.home.navigation.navigateToHome
 import com.apero.sample.ui.compose.screen.onboarding.OnBoardingRoute
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * Created by KO Huyn.
@@ -22,7 +22,7 @@ fun NavController.navigateToOnBoarding(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.onBoardingScreen(appState: AppState) {
     composable(route = OnBoardingNavigation.route) {
         OnBoardingRoute(
-            vm = hiltViewModel(),
+            vm = koinViewModel(),
             onNavigateToHome = { appState.navController.navigateToHome() })
     }
 }

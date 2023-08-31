@@ -13,7 +13,6 @@ import com.apero.sample.data.repository.movie.IMovieRepository
 import com.apero.sample.data.state.FailureState
 import com.apero.sample.data.state.PagingData
 import com.apero.sample.data.state.PagingState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -29,8 +28,7 @@ import javax.inject.Inject
  * Created by KO Huyn on 20/07/2023.
  */
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeViewModel(
     private val movieRepository: IMovieRepository,
     private val monitor: NetworkMonitor,
     private val commonRepository: ICommonRepository,

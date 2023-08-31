@@ -1,7 +1,5 @@
 plugins {
     id "com.android.application" // always on top
-
-    id "com.google.dagger.hilt.android"
     id "com.google.devtools.ksp"
     id "com.google.firebase.crashlytics"
     id "com.google.gms.google-services"
@@ -104,12 +102,11 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version"
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.datastore:datastore-preferences:$datastore_perferences_version"
-    implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_compose_version"
-    implementation "androidx.hilt:hilt-work:$hilt_work_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.startup:startup-runtime:$startup"
     implementation "io.arrow-kt:arrow-core:$arrow_version"
     implementation "io.arrow-kt:arrow-core-retrofit:$arrow_version"
     implementation "com.airbnb.android:lottie-compose:$lottie_version"
@@ -117,7 +114,6 @@ dependencies {
     implementation "com.google.accompanist:accompanist-placeholder:$accompanist_placeholder_version"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
     implementation "com.google.code.gson:gson:$gson_version"
-    implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "com.google.firebase:firebase-analytics"
     implementation "com.google.firebase:firebase-config-ktx"
     implementation "com.google.firebase:firebase-crashlytics"
@@ -126,9 +122,8 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
     implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
     implementation "io.coil-kt:coil-compose:$coil_version"
-
-    kapt "androidx.hilt:hilt-compiler:$hilt_compiler_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
     ksp "androidx.room:room-compiler:$room_version"
 
     testImplementation "junit:junit:$junit_version"

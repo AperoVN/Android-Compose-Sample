@@ -1,6 +1,5 @@
 package com.apero.sample.ui.compose.screen.home.navigation
 
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -11,6 +10,7 @@ import com.apero.sample.ui.compose.AppState
 import com.apero.sample.ui.compose.screen.home.HomeRoute
 import com.apero.sample.ui.compose.screen.selectphoto.navigation.navigateToSelectImage
 import com.apero.sample.ui.compose.screen.setting.navigation.navigateToSetting
+import org.koin.androidx.compose.koinViewModel
 
 /**
  * Created by KO Huyn on 20/07/2023.
@@ -26,7 +26,7 @@ fun NavGraphBuilder.homeScreen(
 ) {
     composable(route = HomeNavigation.route) {
         HomeRoute(
-            vm = hiltViewModel(),
+            vm = koinViewModel(),
             onClickGallery = {
                 appState.navController.navigateToSelectImage()
             },

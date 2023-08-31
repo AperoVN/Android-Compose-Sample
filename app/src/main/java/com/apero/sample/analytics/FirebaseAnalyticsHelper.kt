@@ -8,9 +8,7 @@ import javax.inject.Singleton
 /**
  * Created by KO Huyn on 25/07/2023.
  */
-@Singleton
-class FirebaseAnalyticsHelper @Inject constructor(private val firebaseAnalytics: FirebaseAnalytics) :
-    AnalyticsHelper {
+class FirebaseAnalyticsHelper(private val firebaseAnalytics: FirebaseAnalytics) : AnalyticsHelper {
     override fun logEvent(event: AnalyticsEvent) {
         firebaseAnalytics.logEvent(
             event.type,

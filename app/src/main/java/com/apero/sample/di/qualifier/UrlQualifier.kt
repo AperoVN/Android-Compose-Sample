@@ -13,3 +13,7 @@ annotation class BaseUrl
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class ApiKey
+
+enum class UrlQualifier {
+    BaseUrl, ApiKey
+}
