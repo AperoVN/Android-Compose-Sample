@@ -1,4 +1,4 @@
-package com.apero.sample.ui.compose.screen.selectphoto
+package com.apero.sample.ui.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class ImageSelectorViewModel(
     savedStateHandle: SavedStateHandle,

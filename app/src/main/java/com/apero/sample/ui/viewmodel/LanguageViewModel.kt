@@ -1,4 +1,4 @@
-package com.apero.sample.ui.compose.screen.setting.language
+package com.apero.sample.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class LanguageViewModel(private val commonRepository: ICommonRepository) :
     ViewModel() {

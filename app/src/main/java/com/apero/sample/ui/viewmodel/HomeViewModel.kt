@@ -1,4 +1,4 @@
-package com.apero.sample.ui.compose.screen.home
+package com.apero.sample.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * Created by KO Huyn on 20/07/2023.

@@ -37,6 +37,10 @@ import com.apero.sample.ui.compose.theme.ColorTextSecondary
 import com.apero.sample.ui.compose.theme.FontMedium
 import com.apero.sample.ui.compose.theme.FontRegular
 import com.apero.sample.ui.compose.screen.TrackScreenViewEvent
+import com.apero.sample.ui.viewmodel.SettingItem
+import com.apero.sample.ui.viewmodel.SettingUiState
+import com.apero.sample.ui.viewmodel.SettingViewModel
+import com.apero.sample.ui.viewmodel.settingList
 
 @Composable
 fun SettingRoute(

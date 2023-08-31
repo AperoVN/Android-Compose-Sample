@@ -10,7 +10,7 @@ import com.apero.sample.ui.compose.navigation.controller.NavigationNoArg
 import com.apero.sample.ui.compose.AppState
 import com.apero.sample.ui.compose.screen.onboarding.navigation.navigateToOnBoarding
 import com.apero.sample.ui.compose.screen.setting.language.LanguageRouter
-import com.apero.sample.ui.compose.screen.setting.language.LanguageViewModel
+import com.apero.sample.ui.viewmodel.LanguageViewModel
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel

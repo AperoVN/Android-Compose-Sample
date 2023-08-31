@@ -1,4 +1,4 @@
-package com.apero.sample.ui.compose.screen.onboarding
+package com.apero.sample.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

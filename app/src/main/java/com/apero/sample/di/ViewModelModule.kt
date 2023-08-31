@@ -1,13 +1,13 @@
 package com.apero.sample.di
 
 import com.apero.sample.MainViewModel
-import com.apero.sample.ui.compose.screen.splash.SplashViewModel
-import com.apero.sample.ui.compose.screen.onboarding.OnboardViewModel
-import com.apero.sample.ui.compose.screen.selectphoto.ImageSelectorViewModel
-import com.apero.sample.ui.compose.screen.setting.SettingViewModel
-import com.apero.sample.ui.compose.screen.history.HistoryViewModel
-import com.apero.sample.ui.compose.screen.home.HomeViewModel
-import com.apero.sample.ui.compose.screen.setting.language.LanguageViewModel
+import com.apero.sample.ui.viewmodel.SplashViewModel
+import com.apero.sample.ui.viewmodel.OnboardViewModel
+import com.apero.sample.ui.viewmodel.ImageSelectorViewModel
+import com.apero.sample.ui.viewmodel.SettingViewModel
+import com.apero.sample.ui.viewmodel.HistoryViewModel
+import com.apero.sample.ui.viewmodel.HomeViewModel
+import com.apero.sample.ui.viewmodel.LanguageViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 

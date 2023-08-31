@@ -1,4 +1,4 @@
-package com.apero.sample.ui.compose.screen.history
+package com.apero.sample.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.apero.sample.data.db.model.MovieEntity
@@ -6,9 +6,8 @@ import com.apero.sample.data.state.UiText
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
 
-class HistoryViewModel() : ViewModel() {
+class HistoryViewModel : ViewModel() {
     private val _historyState: MutableStateFlow<HistoryUIState> =
         MutableStateFlow(HistoryUIState().copy(listHistory = List(10) { MovieEntity.mock() }))
     val historyState = _historyState.asStateFlow()

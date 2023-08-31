@@ -43,6 +43,8 @@ import com.apero.sample.ui.compose.component.SpinnerDefault
 import com.apero.sample.ui.compose.component.ToolbarDefault
 import com.apero.sample.ui.compose.screen.TrackScreenViewEvent
 import com.apero.sample.ui.compose.theme.DefaultTextStyleTitle
+import com.apero.sample.ui.viewmodel.ImageSelectorUiState
+import com.apero.sample.ui.viewmodel.ImageSelectorViewModel
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
 

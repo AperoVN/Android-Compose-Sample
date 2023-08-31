@@ -41,6 +41,7 @@ import com.apero.sample.ui.compose.screen.TrackScreenViewEvent
 import com.apero.sample.ui.compose.theme.ColorBackground
 import com.apero.sample.ui.compose.theme.FontMedium
 import com.apero.sample.ui.compose.theme.FontRegular
+import com.apero.sample.ui.viewmodel.OnboardViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 

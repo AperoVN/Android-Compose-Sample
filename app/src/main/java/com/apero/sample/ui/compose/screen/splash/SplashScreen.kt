@@ -26,6 +26,7 @@ import com.apero.sample.ui.compose.screen.splash.navigation.SplashDirectionType
 import com.apero.sample.ui.compose.theme.ColorsGradient
 import com.apero.sample.ui.compose.theme.FontMedium
 import com.apero.sample.ui.compose.screen.TrackScreenViewEvent
+import com.apero.sample.ui.viewmodel.SplashViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 

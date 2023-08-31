@@ -41,6 +41,8 @@ import com.apero.sample.ui.compose.component.ImageLoader
 import com.apero.sample.ui.compose.component.ToolbarDefault
 import com.apero.sample.ui.compose.theme.ColorBackground
 import com.apero.sample.ui.compose.theme.FontMedium
+import com.apero.sample.ui.viewmodel.HistoryUIState
+import com.apero.sample.ui.viewmodel.HistoryViewModel
 import kotlinx.coroutines.launch
 
 @Composable

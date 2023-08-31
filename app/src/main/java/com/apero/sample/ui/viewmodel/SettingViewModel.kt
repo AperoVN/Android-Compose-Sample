@@ -1,4 +1,4 @@
-package com.apero.sample.ui.compose.screen.setting
+package com.apero.sample.ui.viewmodel
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
-import javax.inject.Inject
 
 class SettingViewModel(commonRepository: ICommonRepository) : ViewModel() {
     private val listSettingState = flowOf(settingList)
